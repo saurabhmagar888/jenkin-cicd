@@ -18,8 +18,8 @@ pipeline{
                     when { expression {  params.action == 'create' } }
             steps{
             gitCheckout(
-                branch: "main",
-                url: "https://github.com/praveen1994dec/Java_app_3.0.git"
+                branch: "dev",
+                url: "https://github.com/saurabhmagar888/jenkin-cicd.git"
             )
             }
         }
@@ -53,16 +53,7 @@ pipeline{
                }
             }
        }
-       stage('Quality Gate Status Check : Sonarqube'){
-         when { expression {  params.action == 'create' } }
-            steps{
-               script{
-                   
-                   def SonarQubecredentialsId = 'sonarqube-api'
-                   QualityGateStatus(SonarQubecredentialsId)
-               }
-            }
-       }
+
         stage('Maven Build : maven'){
          when { expression {  params.action == 'create' } }
             steps{
